@@ -112,7 +112,7 @@ func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
 		cupsUp = 0
 	}
 
-	scrapeDuration := time.Now().Sub(scrapeStartTime)
+	scrapeDuration := time.Since(scrapeStartTime)
 
 	ch <- prometheus.MustNewConstMetric(e.scrapeDurationSeconds, prometheus.GaugeValue, scrapeDuration.Seconds())
 	ch <- prometheus.MustNewConstMetric(e.cupsUp, prometheus.GaugeValue, cupsUp)

@@ -37,13 +37,16 @@ func main() {
 
 	http.Handle(opts.MetricsPath, promhttp.Handler())
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(`<html>
+		_, err := w.Write([]byte(`<html>
 			<head><title>Cups Exporter</title></head>
 			<body>
 			<h1>Cups Exporter</h1>
 			<p><a href="` + opts.MetricsPath + `">Metrics</a></p>
 			</body>
 			</html>`))
+		if err != nil {
+			log.Info("An error occured while writing http response: %v", err)
+		}
 	})
 
 	log.Info("listening on " + opts.Address)
