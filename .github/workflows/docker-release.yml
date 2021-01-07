@@ -18,6 +18,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.PAT }}
           registry: ghcr.io
-          repository: camptocamp/cups_exporter
           push: true
-          tag_with_ref: true
+          tags: |
+            camptocamp/cups_exporter:latest
+            camptocamp/cups_exporter:${{ github.event.release.tag_name }}
