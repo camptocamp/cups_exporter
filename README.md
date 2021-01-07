@@ -6,7 +6,6 @@ Prometheus exporter for CUPS server, forked from ["phin1x/cups_exporter"](https:
 
 Download the latest release and run the exporter locally :
 
-Examples:
 ```bash
 $ ./cups_exporter
 INFO	cups_exporter/main.go:30	starting cups exporter
