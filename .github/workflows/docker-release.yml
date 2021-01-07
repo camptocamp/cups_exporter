@@ -19,4 +19,5 @@ jobs:
           password: ${{ secrets.PAT }}
           registry: ghcr.io
           repository: camptocamp/cups_exporter
+          push: true
           tag_with_ref: true
