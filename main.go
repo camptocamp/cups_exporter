@@ -15,8 +15,7 @@ import (
 type options struct {
 	Address     string
 	MetricsPath string
-
-	CupsUri string
+	CupsUri     string
 }
 
 func main() {
@@ -25,7 +24,7 @@ func main() {
 	opts := options{}
 	flag.StringVar(&opts.Address, "web.listen-address", ":9628", "address on which to expose metrics and web interface")
 	flag.StringVar(&opts.MetricsPath, "web.telemetry-path", "/metrics", "path under which to expose metrics")
-	flag.StringVar(&opts.CupsUri, "cups.uri", "https://localhost:631", "uri under with the cups server is available, including username and password it required")
+	flag.StringVar(&opts.CupsUri, "cups.uri", "https://localhost:631", "uri under which the cups server is available, including username and password it required")
 	flag.Parse()
 
 	log.Info("starting cups exporter")
