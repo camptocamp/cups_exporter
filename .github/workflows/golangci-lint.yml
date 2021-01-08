@@ -1,11 +1,11 @@
-name: golangci-lint
+name: Go Lint
 
 on:
   push:
 
 jobs:
   golangci:
-    name: lint
+    name: linting
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
