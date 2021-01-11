@@ -4,7 +4,7 @@ Prometheus exporter for CUPS server, forked from ["phin1x/cups_exporter"](https:
 
 # Running
 
-Download the latest release and run the exporter locally :
+### Download the latest release and run the exporter locally :
 
 ```bash
 $ ./cups_exporter
@@ -24,15 +24,26 @@ Usage of ./cups_exporter:
     	path under which to expose metrics (default "/metrics")
 ```
 
+### With docker :
+
+```bash
+docker run -e CUPS_URI=https://cups.my ghcr.io/camptocamp/cups_exporter:0.0.8
+```
+
+Or if you want to test on your machine :
+
+```bash
+$ docker run --rm --network="host" ghcr.io/camptocamp/cups_exporter:0.0.8
+```
 
 # Metrics
 
 | Metric | Meaning | Labels |
 | ------ | ------- | ------ |
 | cups_up | Was the last scrape of cups successful | |
-| cups_job_state_total | Number of current print jobs per state | state, printer |
+| cups_job_state_total | Number of current print jobs per state | printer, state |
 | cups_job_total | Total number of print jobs per printer | printer |
-| cups_printer_state_total | Number of printers per state | state, printer |
+| cups_printer_state_total | Number of printers per state | printer, state |
 | cups_printer_total | Total number of available printers | |
 | cups_scrape_duration_seconds |  Duration of the last scrape in seconds | |
 
@@ -51,12 +62,20 @@ cups_job_state_total{printer="CUPS_Printer_1",state="stopped"} 0
 # HELP cups_job_total Total number of print jobs
 # TYPE cups_job_total counter
 cups_job_total{printer="CUPS_Printer_1"} 3
+# HELP cups_printer_state_total Number of printers per state
 # TYPE cups_printer_state_total gauge
 cups_printer_state_total{printer="CUPS_Printer_1",state="idle"} 1
 cups_printer_state_total{printer="CUPS_Printer_1",state="processing"} 0
 cups_printer_state_total{printer="CUPS_Printer_1",state="stopped"} 0
+# HELP cups_printer_total Number of available printers
 # TYPE cups_printer_total gauge
 cups_printer_total 2
+# HELP cups_scrape_duration_seconds Duration of the last scrape in seconds
+# TYPE cups_scrape_duration_seconds gauge
+cups_scrape_duration_seconds 0.036579092
+# HELP cups_up Was the last scrape of cups successful
+# TYPE cups_up gauge
+cups_up 1
 ```
 
 # Licence
