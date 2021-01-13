@@ -3,6 +3,7 @@ package pkg
 import (
 	"github.com/phin1x/go-ipp"
 	"github.com/prometheus/client_golang/prometheus"
+	"strconv"
 )
 
 func (e *Exporter) jobsMetrics(ch chan<- prometheus.Metric) error {
@@ -17,7 +18,7 @@ func (e *Exporter) jobsMetrics(ch chan<- prometheus.Metric) error {
 
 		printer := attr["printer-name"][0].Value.(string)
 
-		jobs, err := e.client.GetJobs(printer, "", ipp.JobStateFilterAll, false, 0, 0, []string{"job-state"})
+		jobs, err := e.client.GetJobs(printer, "", "all", false, 0, 0, []string{"job-state"})
 		if err != nil {
 			e.log.Error(err, "failed to fetch all jobs states")
 			return err
@@ -25,7 +26,7 @@ func (e *Exporter) jobsMetrics(ch chan<- prometheus.Metric) error {
 
 		ch <- prometheus.MustNewConstMetric(e.jobsTotal, prometheus.CounterValue, float64(len(jobs)), printer)
 
-		states := make(map[int8]int)
+		states := make(map[int8]int, 7)
 		states[ipp.JobStatePending] = 0
 		states[ipp.JobStateHeld] = 0
 		states[ipp.JobStateProcessing] = 0
@@ -36,7 +37,12 @@ func (e *Exporter) jobsMetrics(ch chan<- prometheus.Metric) error {
 
 		for _, attr := range jobs {
 
-			states[int8(attr["job-state"][0].Value.(int))]++
+			if attr["job-state"][0].Value.(int) <= 9 && attr["job-state"][0].Value.(int) >= 3 {
+				states[int8(attr["job-state"][0].Value.(int))]++
+			} else {
+				e.log.Info("Unknow job state : " + strconv.Itoa(attr["job-state"][0].Value.(int)))
+			}
+
 		}
 
 		ch <- prometheus.MustNewConstMetric(e.jobStateTotal, prometheus.GaugeValue, float64(states[ipp.JobStatePending]), printer, "pending")
