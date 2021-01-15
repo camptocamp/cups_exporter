@@ -18,9 +18,9 @@ func (e *Exporter) jobsMetrics(ch chan<- prometheus.Metric) error {
 
 		printer := attr["printer-name"][0].Value.(string)
 
-		jobs, err := e.client.GetJobs(printer, "", ipp.JobStateFilterAll, false, 0, 0, []string{"job-state"})
+		jobs, err := e.client.GetJobs(printer, "", ipp.JobStateFilterAll, false, 0, 0, []string{})
 		if err != nil {
-			e.log.Error(err, "failed to fetch all jobs states")
+			e.log.Error(err, "failed to fetch all jobs")
 			return err
 		}
 
