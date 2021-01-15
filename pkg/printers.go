@@ -18,12 +18,12 @@ func (e *Exporter) printerMetrics(ch chan<- prometheus.Metric) error {
 
 		printer := attr["printer-name"][0].Value.(string)
 
-		states := make(map[int8]int)
+		states := make(map[ipp.PrinterState]int)
 		states[ipp.PrinterStateIdle] = 0
 		states[ipp.PrinterStateProcessing] = 0
 		states[ipp.PrinterStateStopped] = 0
 
-		states[int8(attr["printer-state"][0].Value.(int))]++
+		states[ipp.PrinterState(attr["printer-state"][0].Value.(int))]++
 
 		ch <- prometheus.MustNewConstMetric(e.printerStateTotal, prometheus.GaugeValue, float64(states[ipp.PrinterStateIdle]), printer, "idle")
 		ch <- prometheus.MustNewConstMetric(e.printerStateTotal, prometheus.GaugeValue, float64(states[ipp.PrinterStateProcessing]), printer, "processing")
