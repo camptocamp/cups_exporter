@@ -204,8 +204,8 @@ github.com/pact-foundation/pact-go v1.0.4/go.mod h1:uExwJY4kCzNPcHRj+hCR/HBbOOIw
 github.com/pascaldekloe/goe v0.0.0-20180627143212-57f6aae5913c/go.mod h1:lzWF7FIEvWOWxwDKqyGYQf6ZUaNfKdP144TG7ZOy1lc=
 github.com/pborman/uuid v1.2.0/go.mod h1:X/NO0urCmaxf9VXbdlT7C2Yzkj2IKimNn4k+gtPdI/k=
 github.com/performancecopilot/speed v3.0.0+incompatible/go.mod h1:/CLtqpZ5gBg1M9iaPbIdPPGyKcA8hKdoy6hAWba7Yac=
-github.com/phin1x/go-ipp v1.5.0 h1:3WLi0RLI3LbF93lHK7TBsK7h53u8tNXZNEokfFOurno=
-github.com/phin1x/go-ipp v1.5.0/go.mod h1:GZwyNds6grdLi2xRBX22Cvt7Dh7ITWsML0bjrqBF5uo=
+github.com/phin1x/go-ipp v1.2.1-0.20191226192803-6c9dee854ace h1:ELNodn+xPzMsqbwObNVFRt/OYlcCEw51IlRYdCtURcM=
+github.com/phin1x/go-ipp v1.2.1-0.20191226192803-6c9dee854ace/go.mod h1:GZwyNds6grdLi2xRBX22Cvt7Dh7ITWsML0bjrqBF5uo=
 github.com/pierrec/lz4 v1.0.2-0.20190131084431-473cd7ce01a1/go.mod h1:3/3N9NVKO0jef7pBehbT1qWhCMrIgbYNnFAZCqQ5LRc=
 github.com/pierrec/lz4 v2.0.5+incompatible/go.mod h1:pdkljMzZIN41W+lC3N2tnIh5sFi+IEE17M5jbnwPHcY=
 github.com/pkg/errors v0.8.0/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=

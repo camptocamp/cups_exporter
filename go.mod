@@ -5,7 +5,7 @@ go 1.13
 require (
 	github.com/go-logr/logr v0.3.0
 	github.com/go-logr/zapr v0.3.0
-	github.com/phin1x/go-ipp v1.5.0
+	github.com/phin1x/go-ipp v1.2.1-0.20191226192803-6c9dee854ace
 	github.com/prometheus/client_golang v1.9.0
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/zap v1.16.0

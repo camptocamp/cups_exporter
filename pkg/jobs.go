@@ -7,7 +7,7 @@ import (
 
 func (e *Exporter) jobsMetrics(ch chan<- prometheus.Metric) error {
 
-	printers, err := e.client.GetPrinters([]string{"printer-state"})
+	printers, err := e.client.GetPrinters([]string{})
 
 	if err != nil {
 		e.log.Error(err, "failed to fetch printers")
@@ -16,15 +16,20 @@ func (e *Exporter) jobsMetrics(ch chan<- prometheus.Metric) error {
 
 	for _, attr := range printers {
 
-		printer := attr["printer-name"][0].Value.(string)
+		if len(attr["printer-name"]) == 1 {
 
-		jobs, err := e.client.GetJobs(printer, "", ipp.JobStateFilterAll, false, 0, 0, []string{})
-		if err != nil {
-			e.log.Error(err, "failed to fetch all jobs")
-			return err
+			printer := attr["printer-name"][0].Value.(string)
+
+			jobs, err := e.client.GetJobs(printer, "", ipp.JobStateFilterAll, false, 0, 0, []string{})
+			if err != nil {
+				e.log.Error(err, "failed to fetch all jobs")
+				return err
+			}
+
+			ch <- prometheus.MustNewConstMetric(e.jobsTotal, prometheus.CounterValue, float64(len(jobs)), printer)
+		} else {
+				e.log.Info("printer name attribute missing")
 		}
-
-		ch <- prometheus.MustNewConstMetric(e.jobsTotal, prometheus.CounterValue, float64(len(jobs)), printer)
 	}
 
 	return nil
