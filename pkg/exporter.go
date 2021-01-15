@@ -53,12 +53,6 @@ func NewExporter(cupsUri string, log logr.Logger) (*Exporter, error) {
 			[]string{"printer"},
 			nil,
 		),
-		jobStateTotal: prometheus.NewDesc(
-			prometheus.BuildFQName(namespace, "job", "state_total"),
-			"Number of jobs per state",
-			[]string{"printer", "state"},
-			nil,
-		),
 		printersTotal: prometheus.NewDesc(
 			prometheus.BuildFQName(namespace, "printer", "total"),
 			"Number of available printers",
@@ -84,7 +78,6 @@ type Exporter struct {
 	cupsUp                *prometheus.Desc
 	scrapeDurationSeconds *prometheus.Desc
 	jobsTotal             *prometheus.Desc
-	jobStateTotal         *prometheus.Desc
 	printersTotal         *prometheus.Desc
 	printerStateTotal     *prometheus.Desc
 }
@@ -93,7 +86,6 @@ func (e *Exporter) Describe(ch chan<- *prometheus.Desc) {
 	ch <- e.cupsUp
 	ch <- e.scrapeDurationSeconds
 	ch <- e.jobsTotal
-	ch <- e.jobStateTotal
 	ch <- e.printersTotal
 	ch <- e.printerStateTotal
 }

@@ -41,7 +41,6 @@ $ docker run --rm --network="host" ghcr.io/camptocamp/cups_exporter:0.0.8
 | Metric | Meaning | Labels |
 | ------ | ------- | ------ |
 | cups_up | Was the last scrape of cups successful | |
-| cups_job_state_total | Number of current print jobs per state | printer, state |
 | cups_job_total | Total number of print jobs per printer | printer |
 | cups_printer_state_total | Number of printers per state | printer, state |
 | cups_printer_total | Total number of available printers | |
@@ -50,15 +49,6 @@ $ docker run --rm --network="host" ghcr.io/camptocamp/cups_exporter:0.0.8
 
 Examples:
 ```
-# HELP cups_job_state_total Number of jobs per state
-# TYPE cups_job_state_total gauge
-cups_job_state_total{printer="CUPS_Printer_1",state="aborted"} 0
-cups_job_state_total{printer="CUPS_Printer_1",state="canceled"} 0
-cups_job_state_total{printer="CUPS_Printer_1",state="completed"} 2
-cups_job_state_total{printer="CUPS_Printer_1",state="held"} 0
-cups_job_state_total{printer="CUPS_Printer_1",state="pending"} 0
-cups_job_state_total{printer="CUPS_Printer_1",state="processing"} 1
-cups_job_state_total{printer="CUPS_Printer_1",state="stopped"} 0
 # HELP cups_job_total Total number of print jobs
 # TYPE cups_job_total counter
 cups_job_total{printer="CUPS_Printer_1"} 3
